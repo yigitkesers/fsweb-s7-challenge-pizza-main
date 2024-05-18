@@ -5,7 +5,8 @@ import './App.css'
 import Header from './components/header'
 import HomePage from './components/homepage'
 import { Route, Switch } from 'react-router-dom';
-import InputPage from './components/input'
+
+import Form from './components/form'
 function App() {
   
 
@@ -16,8 +17,8 @@ function App() {
                 <Route path='/' exact>
                     <HomePage />
                 </Route>
-                <Route path='/InputPage' exact>
-                    <InputPage />
+                <Route path='/Form' exact>
+                    <Form />
                 </Route>
             </Switch>
     </>
