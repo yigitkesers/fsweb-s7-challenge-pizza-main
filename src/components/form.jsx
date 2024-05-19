@@ -511,15 +511,20 @@ const FormArea = () => {
   const extraToppingPrice = 5;
   const pizzaBoyut = ["small", "medium", "large"];
   const pizzaToppings = [
-    { id: 1, name: "Mantar" },
-    { id: 2, name: "Sucuk" },
-    { id: 3, name: "Sosis" },
-    { id: 4, name: "Zeytin" },
-    { id: 5, name: "Biber" },
-    { id: 6, name: "Mısır" },
-    { id: 7, name: "Patlıcan" },
-    { id: 8, name: "Hamsi" },
-    { id: 9, name: "Beyaz Peynir" },
+    { id: 1, name: "Pepperoni" },
+    { id: 2, name: "Tavuk Izgara" },
+    { id: 3, name: "Mısır" },
+    { id: 4, name: "Sarımsak" },
+    { id: 5, name: "Ananas" },
+    { id: 6, name: "Sosis" },
+    { id: 7, name: "Soğan" },
+    { id: 8, name: "Sucuk" },
+    { id: 9, name: "Biber" },
+    { id: 10, name: "Kabak" },
+    { id: 11, name: "Kanada Jambonu" },
+    { id: 12, name: "Domates" },
+    { id: 13, name: "Jalepeno" },
+    { id: 14, name: "Sucuk" },
   ];
 
   const handleInputChange = (event) => {
