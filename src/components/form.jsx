@@ -484,6 +484,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./form.css";
+import { useHistory } from "react-router-dom";
 
 const FormArea = () => {
   const initialFormData = {
@@ -494,6 +495,13 @@ const FormArea = () => {
     extraNotes: "",
     adet: 1,
   };
+
+  let history = useHistory();
+  function handleOkey() {
+    history.push("/Onay");
+  }
+
+  
 
   const [formData, setFormData] = useState(initialFormData);
   const [submitting, setSubmitting] = useState(false);
@@ -555,23 +563,20 @@ const FormArea = () => {
     });
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setSubmitting(true);
-    try {
-      const response = await axios.post(
-        "https://reqres.in/api/pizza",
-        formData
-      );
-      console.log("Yanıt:", response.data);
-    } catch (error) {
-      console.error("Hata:", error);
-    } finally {
-      setSubmitting(false);
-      setFormData(initialFormData);
-      setCounter(1); // Reset form data to initial state
-    }
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post('https://reqres.in/api/pizza', {
+        ...formData,
+        counter,
+        totalPrice
+    })
+        .then(response => {
+            console.log("Sipariş Özeti:", response.data);
+        })
+        .catch(error => {
+            console.error("Sipariş Gönderim Hatası:", error);
+        });
+};
 
   const isFormValid = () => {
     const { isim, boyut, hamurTipi, toppings } = formData;
@@ -582,7 +587,7 @@ const FormArea = () => {
   const totalPrice = (pizzaBasePrice + totalToppingPrice) * counter;
 
   return (
-    <main>
+    <main>   
       <section className="pizza-section">
         <h2>Pizza Adı</h2>
         <div className="pizza-info">
@@ -701,7 +706,7 @@ const FormArea = () => {
                 <div>Pizza Price: {pizzaBasePrice} TL</div>
                 <div>Extra Topping Price: {totalToppingPrice} TL</div>
                 <div>Order Total: {totalPrice} TL</div>
-                <button type="submit" disabled={!isFormValid()}>
+                <button type="submit" disabled={!isFormValid()} onClick={handleOkey}>
                   Sipariş Ver
                 </button>
               </div>

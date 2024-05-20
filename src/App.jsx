@@ -6,12 +6,16 @@ import Header from './components/header'
 import HomePage from './components/homepage'
 import { Route, Switch } from 'react-router-dom';
 
+
 import Form from './components/form'
+import OnayPage from './components/onaypage'
 function App() {
   
 
   return (
+    
     <>
+    
     <Header />
             <Switch>
                 <Route path='/' exact>
@@ -19,6 +23,9 @@ function App() {
                 </Route>
                 <Route path='/Form' exact>
                     <Form />
+                </Route>
+                <Route path='/Onay' exact>
+                    <OnayPage />
                 </Route>
             </Switch>
     </>
