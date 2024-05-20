@@ -652,6 +652,9 @@ const FormArea = () => {
               </label>
             </div>
             <br />
+            <h2>Ek Malzemeler</h2>
+            <br />
+            <p>En Fazla 10 malzeme seçebilirsiniz. 5₺</p>
             <label>Pizza Toppings:</label>
             <div className="toppings">
               {pizzaToppings.map((topping) => (
@@ -681,16 +684,18 @@ const FormArea = () => {
             <hr />
             <div className="order-summary">
               <div className="counter">
-                <button type="button" onClick={() => handleCounterChange(true)}>
-                  +
-                </button>
-                <div className="counter-value">{counter}</div>
-                <button
+              <button
                   type="button"
                   onClick={() => handleCounterChange(false)}
                 >
                   -
                 </button>
+                
+                <div className="counter-value">{counter}</div>
+                <button type="button" onClick={() => handleCounterChange(true)}>
+                  +
+                </button>
+                
               </div>
               <div className="order-total">
                 <div>Pizza Price: {pizzaBasePrice} TL</div>
