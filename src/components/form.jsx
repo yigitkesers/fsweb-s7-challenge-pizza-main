@@ -486,7 +486,7 @@ import axios from "axios";
 import "./form.css";
 import { useHistory } from "react-router-dom";
 
-const FormArea = () => {
+const FormArea = ({setMevcutSipariş}) => {
   const initialFormData = {
     isim: "",
     boyut: "",
@@ -497,15 +497,16 @@ const FormArea = () => {
   };
 
   let history = useHistory();
-  function handleOkey() {
-    history.push("/Onay");
-  }
-
+  
+    
   
 
+  
+  
   const [formData, setFormData] = useState(initialFormData);
   const [submitting, setSubmitting] = useState(false);
   const [counter, setCounter] = useState(1);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     fetchCounter(); 
@@ -517,7 +518,7 @@ const FormArea = () => {
 
   const pizzaBasePrice = 85.50;
   const extraToppingPrice = 5;
-  const pizzaBoyut = ["small", "medium", "large"];
+  const pizzaBoyut = ["S", "M", "L"];
   const pizzaToppings = [
     { id: 1, name: "Pepperoni" },
     { id: 2, name: "Tavuk Izgara" },
@@ -564,14 +565,19 @@ const FormArea = () => {
   };
 
   const handleSubmit = (e) => {
+    const sonSipariş = {
+      ...formData,
+      total
+      
+    }
     e.preventDefault();
-    axios.post('https://reqres.in/api/pizza', {
-        ...formData,
-        counter,
-        totalPrice
-    })
+    axios.post('https://reqres.in/api/pizza', 
+        sonSipariş
+        )
         .then(response => {
-            console.log("Sipariş Özeti:", response.data);
+          setMevcutSipariş(sonSipariş);
+          history.push("/Onay"); 
+          console.log("Sipariş Özeti:", response.data);
         })
         .catch(error => {
             console.error("Sipariş Gönderim Hatası:", error);
@@ -583,13 +589,18 @@ const FormArea = () => {
     return isim && boyut && hamurTipi && toppings.length >= 4 && !submitting;
   };
 
+  
   const totalToppingPrice = formData.toppings.length * extraToppingPrice;
   const totalPrice = (pizzaBasePrice + totalToppingPrice) * counter;
+
+  useEffect(()=>{
+    setTotal(totalPrice);
+  },[formData.toppings, counter]) 
 
   return (
     <main>   
       <section className="pizza-section">
-        <h2>Pizza Adı</h2>
+        <h2>Position Absolute Acı Pizza</h2>
         <div className="pizza-info">
           <h3>{pizzaBasePrice}₺</h3>
           <div className="pizza-rating">
@@ -706,7 +717,7 @@ const FormArea = () => {
                 <div>Pizza Price: {pizzaBasePrice} TL</div>
                 <div>Extra Topping Price: {totalToppingPrice} TL</div>
                 <div>Order Total: {totalPrice} TL</div>
-                <button type="submit" disabled={!isFormValid()} onClick={handleOkey}>
+                <button type="submit" disabled={!isFormValid()} >
                   Sipariş Ver
                 </button>
               </div>

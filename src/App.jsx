@@ -9,9 +9,10 @@ import { Route, Switch } from 'react-router-dom';
 
 import Form from './components/form'
 import OnayPage from './components/onaypage'
+import { useState } from 'react'
 function App() {
   
-
+  const [mevcutSipariş, setMevcutSipariş] = useState(null);
   return (
     
     <>
@@ -22,10 +23,10 @@ function App() {
                     <HomePage />
                 </Route>
                 <Route path='/Form' exact>
-                    <Form />
+                    <Form setMevcutSipariş={setMevcutSipariş} />
                 </Route>
                 <Route path='/Onay' exact>
-                    <OnayPage />
+                    <OnayPage mevcutSipariş={mevcutSipariş} />
                 </Route>
             </Switch>
     </>
